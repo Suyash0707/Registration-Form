@@ -1,0 +1,75 @@
+﻿@model User
+
+<h1>User Registration</h1>
+
+<html>
+<head>
+	<title>
+
+	</title>
+	
+</head>
+<body>
+
+	<form asp-controller="Home" asp-action="Registration" method="post">
+
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="Name" asp-for="Email">Email:</label>
+			<div class="col-sm-5">
+				<input type="email" class="form-control" asp-for="Email" id="Name" placeholder="Enter Email">
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="FName" asp-for="FirstName">First Name:</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" asp-for="FirstName" id="FName" placeholder="Enter First Name">
+				<span asp-validation-for="FirstName" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="Lname" asp-for="LastName">Last Name:</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" asp-for="LastName" id="Lname" placeholder="Enter Last Name">
+				<span asp-validation-for="LastName" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="gender" asp-for="GendersId"> Select Gender:</label>
+			<div>
+				<select class="col-sm-2" asp-for="GendersId">
+					<option value="">- Select Gender -</option>
+
+					@{
+						foreach(var gen in ViewBag.GenderList)
+						{
+							<option value="@gen.Id"> @gen.Text </option>
+						}
+					}
+
+				</select>
+				<span asp-validation-for="GendersId" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="mobile" asp-for="MobileNumber">Mobile No.</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" asp-for="MobileNumber" id="mobile" placeholder="Enter Mobile No.">
+				<span asp-validation-for="MobileNumber" class="text-danger"></span>
+			</div>
+		</div>
+		<br>
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-5">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>
