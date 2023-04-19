@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Registration_Form.DAL;
 
 namespace Registration_Form.Controllers
 {
@@ -14,18 +15,29 @@ namespace Registration_Form.Controllers
         {
             MvcpracticeContext db = new MvcpracticeContext();
             var genders = db.Genders.ToList();
-            
             ViewBag.GenderList = genders;
-            User user = new User();
-            return View(user);
+
+            UserRegistrationViewModel userVM = new UserRegistrationViewModel();
+            return View(userVM);
         }
         [HttpPost]
-        public IActionResult Registration(User user)
+        public IActionResult Registration(UserRegistrationViewModel userVM)
         {
 			MvcpracticeContext db = new MvcpracticeContext();
 			
 			if (ModelState.IsValid == true)
             {
+                //Convert from UserViewModel to UserDTO model
+                User user = new User(); //DTO
+                user.Email = userVM.Email;
+                user.FirstName = userVM.FirstName;
+                user.LastName = userVM.LastName;
+                user.GendersId = userVM.GendersId;
+                user.MobileNumber = userVM.MobileNumber;
+                user.Password = userVM.Password;
+                user.AdharNumber = userVM.AdharNumber;
+
+
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index","Home");
@@ -33,7 +45,7 @@ namespace Registration_Form.Controllers
 			var genders = db.Genders.ToList();
 			ViewBag.GenderList = genders;
 
-			return View(user);
+			return View(userVM);
         }
 
         public IActionResult IsEmailIdValid(string Email)

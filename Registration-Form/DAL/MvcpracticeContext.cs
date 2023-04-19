@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Registration_Form.Models;
+namespace Registration_Form.DAL;
 
 public partial class MvcpracticeContext : DbContext
 {
@@ -77,6 +77,9 @@ public partial class MvcpracticeContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07A410AB7A");
 
+            entity.Property(e => e.AdharNumber)
+                .HasMaxLength(20)
+                .IsUnicode(false);
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -88,6 +91,9 @@ public partial class MvcpracticeContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.MobileNumber)
                 .HasMaxLength(15)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(20)
                 .IsUnicode(false);
 
             entity.HasOne(d => d.Genders).WithMany(p => p.Users)

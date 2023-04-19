@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Registration_Form.Models;
+namespace Registration_Form.DAL;
 
 public partial class Gender
 {
